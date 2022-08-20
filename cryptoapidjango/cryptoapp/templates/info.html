@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>News</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+img {
+            
+            width: 1.5rem;
+}
+body{
+	font-family: 'Roboto', sans-serif,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+i {
+	margin-right: 10px;
+}
+/*----------bootstrap-navbar-css------------*/
+.navbar-logo{
+	padding: 15px;
+	color: #fff;
+}
+.navbar-mainbg{
+	background-color: #5161ce;
+	padding: 0px;
+}
+#navbarSupportedContent{
+	overflow: hidden;
+	position: relative;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
+
+body {
+  background: #f2f2f2;
+}
+
+.card-text{
+  flex-grow: 1;
+}
+
+   </style>
+</head>
+
+<body>    
+
+    <nav class="navbar navbar-expand-custom navbar-mainbg">
+        <h3 class="navbar-brand navbar-logo" href="#"><img src="../static/logo.png">  Crypto Coin</h3>
+        
+        <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars text-white"></i>
+        </button>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid p-0 m-0 align-items-center justify-content-center d-flex" style="min-height: 100vh;">
+
+    <!-- Row for the card-->
+<div class="row w-100 p-0 w-0">
+{% for news in newses %}
+<!-- Column for card-->
+<div class="col-lg-4 mb-2" style="padding-top: 5px;">
+    <div class="card mx-auto" style="width:18rem;">
+        <img class="card-img-top" src="{{news.imageurl}}" alt="{{news.source}}" style="max-height:200px">
+          <div class="card-body">
+              <h5 class="card-title">{{news.title|truncatechars:'30'}}</h5>
+              <p class="card-text">{{ news.body|truncatechars:'80'}} </p>
+              <a href="{{news.url}}" class="btn btn-secondary">Click me</a>
+          </div>
+    </div>
+</div>
+{% endfor %}
+
+
+
+
+
+    
+
+
+    <footer class="fixed-bottom py-2" style="background-color: black !important;">
+        <p class="text-white text-center mb-0">Developed by Jay Patil
+             with <span style="color: red;">❤️</span> </p>
+    </footer>
+    
+<script>
+
+</script>
+</body>
+
+</html>

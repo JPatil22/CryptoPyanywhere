@@ -1,0 +1,126 @@
+{% extends 'home.html' %}
+{% block title %} Information {% endblock %}
+
+<style>
+{% block css %} 
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+img {
+            height: 1.5rem;
+            width: 1.5rem;
+}
+body{
+	font-family: 'Roboto', sans-serif,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+i {
+	margin-right: 10px;
+}
+/*----------bootstrap-navbar-css------------*/
+.navbar-logo{
+	padding: 15px;
+	color: #fff;
+}
+.navbar-mainbg{
+	background-color: #5161ce;
+	padding: 0px;
+}
+#navbarSupportedContent{
+	overflow: hidden;
+	position: relative;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
+
+body {
+  background: #f2f2f2;
+}
+
+.container  {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 600px;
+  width: 850px;
+  background: #f2f2f2;
+  overflow: hidden;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 0 20px 8px #d0d0d0;
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  transform: translatey(-50%);
+  text-align: justify;
+  color: black;
+  padding: 40px;
+  font-family: 'Merriweather', serif;
+}
+
+h1 {
+  font-weight: 900;
+  text-align: center;
+}
+
+h3 {
+  font-weight: 300;
+}
+
+.flap {
+  width: 100%;
+  height: 100%;
+}
+
+.flap::before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 50%;
+  background: url("https://pbs.twimg.com/profile_images/1347260174176710658/2GfSZ1i__400x400.jpg") white;
+  background-position: 100px;
+  background-repeat: no-repeat;
+  transition: 1s;
+}
+
+.flap::after {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 50%;
+  right: 0;
+  background: url("https://pbs.twimg.com/profile_images/1347260174176710658/2GfSZ1i__400x400.jpg") white;
+  background-position: -200px;
+  background-repeat: no-repeat;
+  transition: 1s;
+}
+
+.container:hover .flap::after {
+  transform: translatex(300px);
+}
+
+.container:hover .flap::before{
+  transform: translatex(-300px);
+}
+
+
+{% endblock %}
+</style>
+{% block nav %} {% endblock %}
+<body>
+<h1>hrlog</h1>
+    {% block card %}
+    <div class="container">
+        <div class="content">
+          <h1>hello</h1>
+          <h3>I love designing websites and keep things as simple as possible. My goals is to focus on minimalism and conveying the message that you want to send</h3>
+        </div>
+        <div class="flap"></div>
+      </div>
+      {% endblock %}
+    </body>

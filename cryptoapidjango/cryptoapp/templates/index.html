@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>Crypto Django API</title>
+    <style>
+
+
+
+        <!-- ORIGINAL CSS b4 new navbar addition
+        body {
+            font-family: 'Roboto',sans-serif;
+            background-color: #e8ecf1;
+            color: rgba(0, 107, 237, 0.824);
+        }
+
+        * {
+            color: rgb(17, 17, 17);
+        }
+
+        img {
+            height: 1.5rem;
+            width: 1.5rem;
+        }
+        -->
+
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+body{
+	font-family: 'Roboto';
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+i {
+	margin-right: 10px;
+}
+/*----------bootstrap-navbar-css------------*/
+.navbar-logo{
+	padding: 15px;
+	color: #fff;
+}
+.navbar-mainbg{
+	background-color: #5161ce;
+	padding: 0px;
+}
+#navbarSupportedContent{
+	overflow: hidden;
+	position: relative;
+}
+#navbarSupportedContent ul{
+	padding: 0px;
+	margin: 0px;
+}
+#navbarSupportedContent ul li a i{
+	margin-right: 10px;
+}
+#navbarSupportedContent li {
+	list-style-type: none;
+	float: left;
+}
+#navbarSupportedContent ul li a{
+	color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 15px;
+    display: block;
+    padding: 20px 20px;
+    transition-duration:0.6s;
+	transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+}
+#navbarSupportedContent>ul>li.active>a{
+	color: #5161ce;
+	background-color: transparent;
+	transition: all 0.7s;
+}
+#navbarSupportedContent a:not(:only-child):after {
+	content: "\f105";
+	position: absolute;
+	right: 20px;
+	top: 10px;
+	font-size: 14px;
+	font-family: "Font Awesome 5 Free";
+	display: inline-block;
+	padding-right: 3px;
+	vertical-align: middle;
+	font-weight: 900;
+	transition: 0.5s;
+}
+#navbarSupportedContent .active>a:not(:only-child):after {
+	transform: rotate(90deg);
+}
+.hori-selector{
+	display:inline-block;
+	position:absolute;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	transition-duration:0.6s;
+	transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	background-color: #fff;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	margin-top: 10px;
+}
+.hori-selector .right,
+.hori-selector .left{
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	background-color: #fff;
+	bottom: 10px;
+}
+.hori-selector .right{
+	right: -25px;
+}
+.hori-selector .left{
+	left: -25px;
+}
+.hori-selector .right:before,
+.hori-selector .left:before{
+	content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #5161ce;
+}
+.hori-selector .right:before{
+	bottom: 0;
+    right: -25px;
+}
+.hori-selector .left:before{
+	bottom: 0;
+    left: -25px;
+}
+
+
+@media(min-width: 992px){
+	.navbar-expand-custom {
+	    -ms-flex-flow: row nowrap;
+	    flex-flow: row nowrap;
+	    -ms-flex-pack: start;
+	    justify-content: flex-start;
+	}
+	.navbar-expand-custom .navbar-nav {
+	    -ms-flex-direction: row;
+	    flex-direction: row;
+	}
+	.navbar-expand-custom .navbar-toggler {
+	    display: none;
+	}
+	.navbar-expand-custom .navbar-collapse {
+	    display: -ms-flexbox!important;
+	    display: flex!important;
+	    -ms-flex-preferred-size: auto;
+	    flex-basis: auto;
+	}
+}
+
+
+@media (max-width: 991px){
+	#navbarSupportedContent ul li a{
+		padding: 12px 30px;
+	}
+	.hori-selector{
+		margin-top: 0px;
+		margin-left: 10px;
+		border-radius: 0;
+		border-top-left-radius: 25px;
+		border-bottom-left-radius: 25px;
+	}
+	.hori-selector .left,
+	.hori-selector .right{
+		right: 10px;
+	}
+	.hori-selector .left{
+		top: -25px;
+		left: auto;
+	}
+	.hori-selector .right{
+		bottom: -25px;
+	}
+	.hori-selector .left:before{
+		left: -25px;
+		top: -25px;
+	}
+	.hori-selector .right:before{
+		bottom: -25px;
+		left: -25px;
+	}
+
+	.colorBlue{
+		color:rgb(24, 246, 24);
+	}
+	.colorRed {
+		color: Red;
+	}
+}
+   </style>
+</head>
+
+<body>
+    <!-- nav b4 new trail adition
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Crypto API Django</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="d-flex ms-auto">
+                    <input class="form-control me-2" type="search" placeholder="Search Crypto" aria-label="Search" id="myInput">
+                    
+                </form>
+            </div>
+        </div>
+    </nav> -->
+    
+    
+    <nav class="navbar navbar-expand-custom navbar-mainbg">
+        <h3 class="navbar-brand navbar-logo" href="#"><img src="../static/logo.png">  Crypto Coin</h3>
+        
+        <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars text-white"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto ">
+                <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+                 <li class="nav-item">
+                    <a class="nav-link" href="/info"><i class="fas fa-tachometer-alt"></i>News</a>
+                </li>
+				<li class="nav-item">
+                    <a class="nav-link" href="https://coinexpansion.com/guide-crypto-trading-tips/"><i class="far fa-copy"></i>Tips</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://en.wikipedia.org/wiki/Cryptocurrency"><i class="far fa-clone"></i>How it started</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://coinmarketcap.com/alexandria/article/a-beginner-s-guide-to-investing-in-cryptocurrencies"><i class="far fa-calendar-alt"></i>First Timer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.globallegalinsights.com/practice-areas/blockchain-laws-and-regulations/india#:~:text=%20Chapter%20content%20-%20Free%20access%20%201,be%20exigible%20to%20tax%20in%20India.%20More%20"><i class="far fa-chart-bar"></i>LAWS</a>
+                </li>
+				<li class="nav-item active">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-address-book"></i>Today's Xchange</a>
+                </li>
+               
+            </ul>
+            
+                <form class="d-flex ms-auto order-0">
+                    <input class="form-control me-2" type="search" placeholder="Search Crypto" aria-label="Search" id="myInput">
+                </form>
+            
+        </div>
+    </nav>
+    
+    
+    
+    
+    
+    <section>
+        <div class="container py-5">
+            <div class="table-responsive text-white">
+				
+                <table class="table table-striped text-center table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Symbol</th>
+                            <th scope="col">Current Price</th>
+                            <th scope="col">Market Capital</th>
+							<th scope="col">Day High</th>
+							<th scope="col">Day Low</th>
+                            
+                            <th scope="col">Price Change in Last 24 hrs</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myTable">
+                        {% for i in apidata %}
+                        <tr>
+                            <tr >
+                                <td style="color: rgb(5, 5, 5);">
+                                <div class="grid grid-cols-2 gap-4">
+                                   <div><img src="{{i.image}}"></div>
+								   <div>{{i.name}}</div>
+								   	<!--<form id='GFG' action="info1" method="POST">
+										{% csrf_token %}
+											<button type="submit" href="" id ="{{i.market_cap_rank}}" data-myValue={{i.symbol}} data-val="{{i.id}}" onclick="myFunction(this.id)" style="text-decoration:none">
+												{{i.name}}
+											</button>
+								   	</form> -->                              
+                                </div>
+                                </td>
+                                <td style="color:black">{{i.symbol}}</td>
+                                <td style="color:rgb(12, 12, 12);">₹{{i.current_price}}</td>
+                                <td style="color:rgb(11, 11, 11);">{{i.market_cap}}</td>
+                                <!--<td style="color:rgb(11, 11, 11);">{{i.market_cap_rank}}</td>-->
+                                <td style="color:rgb(11, 11, 11);">{{i.high_24h}}</td>
+								<td style="color:rgb(11, 11, 11);">{{i.low_24h}}</td>
+								<td ><p class="colorBlue">{{i.price_change_percentage_24h}}%</td>
+                            </tr>
+                        
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <footer class="fixed-bottom py-2" style="background-color: black !important;">
+        <p class="text-white text-center mb-0">Developed by Jay Patil
+             with <span style="color: red;">❤️</span> </p>
+    </footer>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+        //<!--NEW Bootstrap navbar js addition-->
+
+         // ---------Responsive-navbar-active-animation-----------
+
+function myFunction(id){
+	//const y="getinfid";
+	//y+=x;
+	//var val = document.getElementById('getinfid{{i.market_cap_rank}}').getAttribute('data-myvalue');
+	//var val = document.getElementById(y).getAttribute('data-myvalue');
+	//var x = document.getElementById('getinfid').getAttribute('data-val');
+	//y+=x
+	//var val = document.getElementById(id).getAttribute('data-val');
+	document.getElementById('GFG').submit();
+	//alert(val);
+}
+
+		 function test(){
+	var tabsNewAnim = $('#navbarSupportedContent');
+	var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
+	var activeItemNewAnim = tabsNewAnim.find('.active');
+	var activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
+	var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
+	var itemPosNewAnimTop = activeItemNewAnim.position();
+	var itemPosNewAnimLeft = activeItemNewAnim.position();
+	$(".hori-selector").css({
+		"top":itemPosNewAnimTop.top + "px", 
+		"left":itemPosNewAnimLeft.left + "px",
+		"height": activeWidthNewAnimHeight + "px",
+		"width": activeWidthNewAnimWidth + "px"
+	});
+	$("#navbarSupportedContent").on("click","li",function(e){
+		$('#navbarSupportedContent ul li').removeClass("active");
+		$(this).addClass('active');
+		var activeWidthNewAnimHeight = $(this).innerHeight();
+		var activeWidthNewAnimWidth = $(this).innerWidth();
+		var itemPosNewAnimTop = $(this).position();
+		var itemPosNewAnimLeft = $(this).position();
+		$(".hori-selector").css({
+			"top":itemPosNewAnimTop.top + "px", 
+			"left":itemPosNewAnimLeft.left + "px",
+			"height": activeWidthNewAnimHeight + "px",
+			"width": activeWidthNewAnimWidth + "px"
+		});
+	});
+}
+$(document).ready(function(){
+	setTimeout(function(){ test(); });
+});
+$(window).on('resize', function(){
+	setTimeout(function(){ test(); }, 500);
+});
+$(".navbar-toggler").click(function(){
+	$(".navbar-collapse").slideToggle(300);
+	setTimeout(function(){ test(); });
+});
+
+
+
+// --------------add active class-on another-page move----------
+jQuery(document).ready(function($){
+	// Get current path and find target link
+	var path = window.location.pathname.split("/").pop();
+
+	// Account for home page with empty path
+	if ( path == '' ) {
+		path = 'index.html';
+	}
+
+	var target = $('#navbarSupportedContent ul li a[href="'+path+'"]');
+	// Add active class to target link
+	target.parent().addClass('active');
+});
+
+
+
+
+// Add active class on another page linked
+// ==========================================
+// $(window).on('load',function () {
+//     var current = location.pathname;
+//     console.log(current);
+//     $('#navbarSupportedContent ul li a').each(function(){
+//         var $this = $(this);
+//         // if the current path is like this link, make it active
+//         if($this.attr('href').indexOf(current) !== -1){
+//             $this.parent().addClass('active');
+//             $this.parents('.menu-submenu').addClass('show-dropdown');
+//             $this.parents('.menu-submenu').parent().addClass('active');
+//         }else{
+//             $this.parent().removeClass('active');
+//         }
+//     })
+// });
+
+    </script>
+
+</body>
+
+</html>
